@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- namespace.yaml
+- clusterrole.yaml
+- serviceaccount.yaml
+- master.yaml
+- service.yaml
+- worker.yaml
+
+vars:
+- name: MASTER_SERVICE_NAME
+  objref:
+    kind: Service
+    name: nfd-master
+    apiVersion: v1

@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nfd-master
+  namespace: node-feature-discovery
+spec:
+  selector:
+    app: node-feature-discovery
+    role: master
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: gRPC
+    name: gRPC
+  type: ClusterIP

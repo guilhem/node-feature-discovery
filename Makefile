@@ -18,26 +18,12 @@ K8S_NAMESPACE := kube-system
 KUBECONFIG :=
 E2E_TEST_CONFIG :=
 
-yaml_templates := $(wildcard *.yaml.template)
-yaml_instances := $(patsubst %.yaml.template,%.yaml,$(yaml_templates))
-
 all: image
 
-image: yamls
+image:
 	$(IMAGE_BUILD_CMD) --build-arg NFD_VERSION=$(VERSION) \
 		-t $(IMAGE_TAG) \
 		$(IMAGE_BUILD_EXTRA_OPTS) ./
-
-yamls: $(yaml_instances)
-
-%.yaml: %.yaml.template .FORCE
-	@echo "$@: namespace: ${K8S_NAMESPACE}"
-	@echo "$@: image: ${IMAGE_TAG}"
-	@sed -E \
-	     -e s',^(\s*)name: node-feature-discovery # NFD namespace,\1name: ${K8S_NAMESPACE},' \
-	     -e s',^(\s*)image:.+$$,\1image: ${IMAGE_TAG},' \
-	     -e s',^(\s*)namespace:.+$$,\1namespace: ${K8S_NAMESPACE},' \
-	     $< > $@
 
 mock:
 	mockery --name=FeatureSource --dir=source --inpkg --note="Re-generate by running 'make mock'"
