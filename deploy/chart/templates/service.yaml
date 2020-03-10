@@ -9,8 +9,8 @@ spec:
   type: {{ .Values.master.service.type }}
   ports:
     - port: {{ .Values.master.service.port }}
-      targetPort: gRPC
+      targetPort: grpc
       protocol: TCP
-      name: gRPC
+      name: grpc
   selector:
     {{- include "node-feature-discovery.selectorLabels" . | nindent 4 }}

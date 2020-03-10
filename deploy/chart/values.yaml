@@ -68,6 +68,8 @@ master:
                 values: [""]
 
 worker:
+  options: {}
+
   podSecurityContext: {}
     # fsGroup: 2000
 
@@ -108,3 +110,22 @@ worker:
               - key: "node-role.kubernetes.io/master"
                 operator: In
                 values: [""]
+
+## RBAC parameteres
+## https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+##
+rbac:
+  create: true
+  ## Service Account for pods
+  ## https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
+  ##
+  serviceAccountName: default
+  ## Annotations for the Service Account
+  ##
+  serviceAccountAnnotations: {}
+  ## RBAC API version
+  ##
+  apiVersion: v1
+  ## Podsecuritypolicy
+  ##
+  pspEnabled: false
