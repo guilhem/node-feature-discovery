@@ -11,6 +11,6 @@ spec:
   ports:
   - protocol: TCP
     port: 8080
-    targetPort: gRPC
-    name: gRPC
+    targetPort: grpc
+    name: grpc
   type: ClusterIP

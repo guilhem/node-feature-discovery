@@ -44,7 +44,7 @@ spec:
           image: quay.io/kubernetes_incubator/node-feature-discovery:v0.5.0
           ports:
           - containerPort: 8080
-            name: gRPC
+            name: grpc
           command:
             - "nfd-master"
 ## Enable TLS authentication
